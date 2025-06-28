@@ -53,7 +53,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",  # React's default port
     "http://127.0.0.1:5173",
+    "https://tahirkhan8827.github.io",
 ]
+CORS_ALLOW_ALL_ORIGINS = False  # Make sure this is NOT True
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",

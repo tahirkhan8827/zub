@@ -101,19 +101,15 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+import dj_database_url
+import os
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'zub_db',
-        'USER': 'zub_db_user',
-        'PASSWORD': 'RgP6QL6oXeMWwmkFoPZxb7DITzIidu0c',
-        'HOST': 'dpg-d1g3jl6mcj7s73cbckcg-a.oregon-postgres.render.com',
-        'PORT': '5432',
-        'OPTIONS': {
-            'sslmode': 'require',
-            'sslrootcert': os.path.join(BASE_DIR, 'render-db-ca.crt'),
-        },
-    }
+    'default': dj_database_url.config(
+        default='postgresql://zub_db_user:RgP6QL6oXeMWwmkFoPZxb7DITzIidu0c@dpg-d1h1ofmmcj7s73dbg5g0-a/zub_db',
+        conn_max_age=600,
+        ssl_require=True  # important for Render
+    )
 }
 
 

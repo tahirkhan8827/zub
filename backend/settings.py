@@ -60,7 +60,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # React's default port
     "http://127.0.0.1:5173",
     "https://tahirkhan8827.github.io",
-    "https://tahirkhan8827.github.io/zuf"
 ]
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
@@ -163,6 +162,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 import os
 # settings.py
+# settings.py
+
+WHITENOISE_MANIFEST_STRICT = False
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

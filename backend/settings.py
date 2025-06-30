@@ -15,7 +15,14 @@ SECRET_KEY = 'django-insecure-bpx_3t9hx9zsdr@pyjom77p$69lk3hff_0g4wkz2$qo&&=hnlc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+
+
+ALLOWED_HOSTS = [
+    'zub.onrender.com',
+    'localhost',
+    '127.0.0.1'
+]
+
 
 
 # Application definition
@@ -36,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -60,6 +68,8 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://zub.onrender.com",
+    "https://tahirkhan8827.github.io"
 ]
 
 # Session will expire after 1 hour (3600 seconds)
@@ -100,13 +110,17 @@ import os
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ecommerce_backend_iqbk',
-        'USER': 'ecommerce_backend_iqbk_user',
-        'PASSWORD': 'hTQ5J0e15EiM1eH5bzpaXMYTwbCUPjSk',
-        'HOST': 'dpg-d1g3jl6mcj7s73cbckcg-a.oregon-postgres.render.com',
+        'NAME': 'zub_db',
+        'USER': 'zub_db_user',
+        'PASSWORD': 'RgP6QL6oXeMWwmkFoPZxb7DITzIidu0c',
+        'HOST': 'dpg-d1h1ofmmcj7s73dbg5g0-a.oregon-postgres.render.com',
         'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
     }
 }
+
 
 
 
@@ -158,7 +172,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
-
+import os
+# settings.py
+# settings.py
 
 import os
 
@@ -167,10 +183,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
+WHITENOISE_MANIFEST_STRICT = False
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

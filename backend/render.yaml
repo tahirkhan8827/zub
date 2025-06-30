@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: your-django-app
+    runtime: python
+    buildCommand: pip install -r requirements.txt && python manage.py migrate
+    startCommand: gunicorn your_project.wsgi:application
+    envVars:
+      - key: DATABASE_URL
+        value: postgresql://zub_db_user:RgP6QL6oXeMWwmkFoPZxb7DITzIidu0c@dpg-d1h1ofmmcj7s73dbg5g0-a.oregon-postgres.render.com/zub_db
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"

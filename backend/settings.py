@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -48,7 +49,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 CORS_ALLOW_CREDENTIALS = True
 SESSION_COOKIE_SAMESITE = 'Lax'
@@ -105,11 +105,17 @@ import dj_database_url
 import os
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://zub_db_user:RgP6QL6oXeMWwmkFoPZxb7DITzIidu0c@dpg-d1h1ofmmcj7s73dbg5g0-a/zub_db',
-        conn_max_age=600,
-        ssl_require=True  # important for Render
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'zub_db',
+        'USER': 'zub_db_user',
+        'PASSWORD': 'RgP6QL6oXeMWwmkFoPZxb7DITzIidu0c',
+        'HOST': 'dpg-d1h1ofmmcj7s73dbg5g0-a.oregon-postgres.render.com',
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
+    }
 }
 
 
@@ -167,8 +173,9 @@ import os
 WHITENOISE_MANIFEST_STRICT = False
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# Optional: Enable gzip compression
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 

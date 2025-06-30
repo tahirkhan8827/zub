@@ -107,8 +107,12 @@ DATABASES = {
         'NAME': 'zub_db',
         'USER': 'zub_db_user',
         'PASSWORD': 'RgP6QL6oXeMWwmkFoPZxb7DITzIidu0c',
-        'HOST': 'dpg-d1h1ofmmcj7s73dbg5g0-a.oregon-postgres.render.com',
+        'HOST': 'dpg-d1g3jl6mcj7s73cbckcg-a.oregon-postgres.render.com',
         'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',  # This is the crucial line
+            'sslrootcert': os.path.join(BASE_DIR, 'render-db-ca.crt'),  # Optional
+        },
     }
 }
 
